@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 import os
+from whitenoise.django import DjangoWhiteNoise
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blogchancuu.settings')
+application = get_wsgi_application()
+application = DjangoWhiteNoise(application)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
