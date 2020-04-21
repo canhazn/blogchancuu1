@@ -42,9 +42,12 @@
         'sai-gon-binh-yen-vi-co-em.mp3',
         'toi-nuoi-co.mp3',
         'ly-do-nao-de-quay-lai-voi-nhau.mp3'];
+
+    // let album = ['b1.mp3', 'b2.mp3'];
     album = album.map((track) => "{% static 'music/' %}" + track);
     let activeTrack = Math.floor(Math.random() * album.length);
-    let audioManager = new Audio(album[activeTrack]);
+    let audioManager = new Audio(album[activeTrack]);    
+    console.log(album[activeTrack]);
     $(".bi-pause-fill").hide();
     $("#play-btn").click(() => {
         $("#play-btn").button('toggle');
@@ -59,10 +62,11 @@
         }
     })
     audioManager.addEventListener("ended", function () {
+        console.log(audioManager.currentSrc);
         let newTrack = Math.floor(Math.random() * album.length);
         if ((newTrack == activeTrack) && (newTrack == album.length - 1)) newTrack--;
-        activeTrack = newTrack != activeTrack ? newTrack : Math.floor((newTrack + album.length) / 2);
-        console.log(album[activeTrack]);
+        activeTrack = newTrack != activeTrack ? newTrack : Math.floor((newTrack + album.length) / 2);        
+        audioManager.src = album[activeTrack];
         audioManager.play();
     });
 </script>
